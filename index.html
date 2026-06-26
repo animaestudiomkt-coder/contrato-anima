@@ -303,7 +303,7 @@
 // ── CONSTANTS ────────────────────────────────────────────────
 const ADMIN_PW    = "813813";
 const JSONBIN_KEY = "$2a$10$tq/EZGFlN5/x7bx2.5sua.8gIbmkCbvxQV96LgFX5sbuQFVDfImd2";
-const AGENCY      = { cuit: "TU-CUIT-ACÁ", email: "contacto@animastudio.com.ar", tel: "+54 11 XXXX-XXXX" };
+const AGENCY      = { cuit: "24-41640883-7", email: "anima.estudiomkt@gmail.com", tel: "+54 11 24956844" };
 
 // ── ADMIN LOCK ───────────────────────────────────────────────
 function toggleAdmin() {
@@ -452,11 +452,11 @@ async function generateLink() {
     if (det) data[s.detId] = det.value;
   });
   data.adenda_text = document.getElementById('adenda_text').value;
-  // Save clause overrides
+  // Save clause content directly from the preview DOM
   const clauseOverrides = {};
   for (let i = 0; i <= 12; i++) {
-    const ta = document.getElementById('cta_' + i);
-    if (ta) clauseOverrides[i] = ta.value;
+    const el = document.getElementById('cl' + i);
+    if (el) clauseOverrides[i] = el.innerHTML;
   }
   data.clauseOverrides = clauseOverrides;
   try {
@@ -532,7 +532,7 @@ async function loadFromUrl() {
     if (data.clauseOverrides) {
       Object.keys(data.clauseOverrides).forEach(i => {
         const el = document.getElementById('cl' + i);
-        if (el) el.innerText = data.clauseOverrides[i];
+        if (el) el.innerHTML = data.clauseOverrides[i];
       });
     }
     updateFooter();
